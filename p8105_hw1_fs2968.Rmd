@@ -29,6 +29,10 @@ In the graph above, we have bill length on the x-axis and flipper length on the 
 
 # Problem 2, Building dataframe
 
+We create a dataframe with a random sample of length 10 from a normal distribution, a logical vector that maps the function, greater than 0, onto the random sample, a character vector with letters a through k, and a factor vector with repeated low, medium, and high values (we specify it to be length 10, so the last element is low). 
+
+After creating this dataframe, we take the mean of each vector/list. We are able to successfully take the mean for the first two vectors, but the last two return NA. The reason that taking the mean of the first two vectors work is because they are numeric lists, with the first being real numbers and the second being boolean values that map to 0 and 1. The second two lists don't have a mean because they are both values that cannot be natively mapped to number values. 
+
 ```{r}
 
 df = tibble(
@@ -42,14 +46,15 @@ mean_out <- c(mean(pull(df, rand_sample)), mean(pull(df, log_vec)), mean(pull(df
 
 mean_out 
 
+```
+To transform the data type of the last three lists into numerical values where the mean can be taken, we can use the as.numeric function. 
+
+```{r}
 as.numeric(pull(df, log_vec))
 as.numeric(pull(df, char_vec))
 as.numeric(pull(df, factor_vec))
-
 ```
-
-
-
+However, using the as.numeric function only transforms the logical vector and the factor vector into numerical values, while the character vector continues to return NA. This implies that since the logical vector has number values for True and False and the factor vector can be transformed into a numerical order, those two lists can be represented numerically. Unfortunately, the character vector cannot be transformed in such a way, so it continues to be NA.
 
 
 
