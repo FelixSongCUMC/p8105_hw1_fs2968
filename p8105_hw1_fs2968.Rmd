@@ -16,8 +16,9 @@ The penguin dataset avaialble with the palmerpenguins package describes `r ncol(
 # Plotting Data
 Here, we can plot some of our data to help visualize it. For example, below we plot bill length vs flipper length:
 
-```{r echo=FALSE}
-ggplot(penguins, aes(x = (bill_length_mm), y = (flipper_length_mm), color=species)) + geom_point()
+```{r echo=FALSE, message=FALSE}
+penguins_plot <- penguins %>% drop_na(bill_length_mm, flipper_length_mm)
+ggplot(penguins_plot, aes(x = bill_length_mm, y = flipper_length_mm, color=species)) + geom_point()
 ggsave("scatterplot.pdf")
 ```
 
