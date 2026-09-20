@@ -3,3 +3,22 @@ title: "p8105_hw1_fs2968"
 output: github_document
 ---
 
+```{r echo=FALSE, message = FALSE}
+library(tidyverse) #Loading necessary library
+data("penguins", package = "palmerpenguins")
+
+```
+
+# Penguin Dataset Summary
+The penguin dataset avaialble with the palmerpenguins package describes `r ncol(penguins)` different characteristics of penguins for a total of `r nrow(penguins)` penguins. These characteristics are measured in different ways as well. The species of penguin, the island of origin, and sex are categorical variables with values like Adelie, Torgersen, and female respectively. The bill length and depth are measured as doubles to the first decimal place. Lastly, flipper length, body mass index, and year are measured as integers. We can do some simple statistics with this data set to gain insight, like calculating the mean of the penguins flipper length: `r mean(penguins$flipper_length_mm, na.rm=TRUE)`.
+
+
+# Plotting Data
+Here, we can plot some of our data to help visualize it. For example, below we plot bill length vs flipper length:
+
+```{r echo=FALSE}
+ggplot(penguins, aes(x = (bill_length_mm), y = (flipper_length_mm), color=species)) + geom_point()
+ggsave("scatterplot.pdf")
+```
+
+
