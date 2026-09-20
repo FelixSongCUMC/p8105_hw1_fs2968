@@ -9,17 +9,41 @@ data("penguins", package = "palmerpenguins")
 
 ```
 
-# Penguin Dataset Summary
-The penguin dataset avaialble with the palmerpenguins package describes `r ncol(penguins)` different characteristics of penguins for a total of `r nrow(penguins)` penguins. These characteristics are measured in different ways as well. The species of penguin, the island of origin, and sex are categorical variables with values like Adelie, Torgersen, and female respectively. The bill length and depth are measured as doubles to the first decimal place. Lastly, flipper length, body mass index, and year are measured as integers. We can do some simple statistics with this data set to gain insight, like calculating the mean of the penguins flipper length: `r mean(penguins$flipper_length_mm, na.rm=TRUE)`.
+# Problem 1, Penguin Dataset Summary
+The penguin dataset avaialble with the palmerpenguins package describes `r ncol(penguins)` different characteristics of penguins for a total of `r nrow(penguins)` penguins. These characteristics are measured in different ways as well. The species of penguin, the island of origin, and sex are categorical variables with values like Adelie, Torgersen, and female respectively. The bill length and depth are measured as doubles to the first decimal place. Lastly, flipper length, body mass index, and year are measured as integers. We can do some simple statistics with this data set to gain insight, like calculating the mean of the penguins flipper length: `r mean((pull(penguins, flipper_length_mm)), na.rm=TRUE)`.
 
 
 # Plotting Data
 Here, we can plot some of our data to help visualize it. For example, below we plot bill length vs flipper length:
 
-```{r echo=FALSE, message=FALSE}
+```{r echo=FALSE, message=FALSE} 
 penguins_plot <- penguins %>% drop_na(bill_length_mm, flipper_length_mm)
 ggplot(penguins_plot, aes(x = bill_length_mm, y = flipper_length_mm, color=species)) + geom_point()
 ggsave("scatterplot.pdf")
 ```
+
+In the graph above, we have 
+
+# Problem 2, Building dataframe
+
+```{r}
+
+df = tibble(
+  rand_sample = rnorm(10),
+  log_vec = rand_sample > 0,
+  char_vec = c("a","b","c","d","e","f","g","h","i","k"),
+  factor_vec = factor(rep(c("low", "medium", "high"), length.out= 10))
+)
+
+mean_out <- c(mean(pull(df, rand_sample)), mean(pull(df, log_vec)), mean(pull(df, char_vec)), mean(pull(df, factor_vec)))
+mean_out 
+```
+
+
+
+
+
+
+
 
 
