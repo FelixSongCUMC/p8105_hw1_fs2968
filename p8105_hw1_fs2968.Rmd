@@ -52,7 +52,7 @@ mean_out
 ```
 To transform the data type of the last three lists into numerical values where the mean can be taken, we can use the as.numeric function. 
 
-```{r results = FALSE, warning = FALSE}
+```{r eval=FALSE}
 #Transforming the last 3 vectors into numeric (attempt)
 as.numeric(pull(df, log_vec))
 as.numeric(pull(df, char_vec))
