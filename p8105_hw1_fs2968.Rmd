@@ -3,7 +3,7 @@ title: "p8105_hw1_fs2968"
 output: github_document
 ---
 
-```{r echo=FALSE, message = FALSE}
+```{r}
 #Loading necessary library and database
 library(tidyverse) 
 data("penguins", package = "palmerpenguins")
@@ -11,16 +11,17 @@ data("penguins", package = "palmerpenguins")
 ```
 
 # Problem 1, Penguin Dataset Summary
-The penguin dataset avaialble with the palmerpenguins package describes `r ncol(penguins)` different characteristics of penguins for a total of `r nrow(penguins)` penguins. These characteristics are measured in different ways as well. The species of penguin, the island of origin, and sex are categorical variables with values like Adelie, Torgersen, and female respectively. The bill length and depth are measured as doubles to the first decimal place. Lastly, flipper length, body mass index, and year are measured as integers. We can do some simple statistics with this data set to gain insight, like calculating the mean of the penguins flipper length after removing NA values: `r mean((pull(penguins, flipper_length_mm)), na.rm=TRUE)`. 
+The penguin dataset available with the palmerpenguins package describes `r ncol(penguins)` different characteristics of penguins for a total of `r nrow(penguins)` penguins. These characteristics are measured in different ways as well. The species of penguin, the island of origin, and sex are categorical variables with values like Adelie, Torgersen, and female respectively. The bill length and depth are measured as doubles to the first decimal place. Lastly, flipper length, body mass index, and year are measured as integers. We can do some simple statistics with this data set to gain insight on our sample population, like calculating the mean of the penguins flipper length after removing NA values: `r mean((pull(penguins, flipper_length_mm)), na.rm=TRUE)`. 
 
 
 # Plotting Data
 Here, we can plot some of our data to help visualize it. For example, below we plot bill length vs flipper length:
 
-```{r echo=FALSE, message=FALSE} 
-#Creating a seperate database with removed na values
-penguins_plot <- penguins %>% drop_na(bill_length_mm, flipper_length_mm)
-#Plotting 2 columns of data in a scattor plot, colored by species
+```{r} 
+#Creating a separate database with removed na values
+penguins_plot <- penguins |> 
+  drop_na(bill_length_mm, flipper_length_mm)
+#Plotting 2 columns of data in a scatter plot, colored by species
 ggplot(penguins_plot, aes(x = bill_length_mm, y = flipper_length_mm, color=species)) + geom_point()
 ggsave("scatterplot.pdf")
 ```
@@ -49,7 +50,7 @@ mean_out
 ```
 To transform the data type of the last three lists into numerical values where the mean can be taken, we can use the as.numeric function. 
 
-```{r}
+```{r results = FALSE, warning = FALSE}
 as.numeric(pull(df, log_vec))
 as.numeric(pull(df, char_vec))
 as.numeric(pull(df, factor_vec))
